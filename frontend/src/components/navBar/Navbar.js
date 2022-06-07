@@ -40,7 +40,7 @@ const Navbar = (props) => {
           open={true}
           variant="persistent"
         >
-          <Button sx={{margin: 2}} >
+          <Button sx={{margin: 2}} variant={useLocation().pathname === "/home" ? "outlined" : "text"} component={Link} to="/home" startIcon={useLocation().pathname === "/home" ? <HomeIcon style={{ fontSize: 35 }}/> : <HomeOutlinedIcon style={{ fontSize: 35 }}/>}>
             <Typography>Home</Typography>
           </Button>
         </Drawer>

@@ -14,7 +14,8 @@ import {
   Drawer,
   Box,
 } from "@mui/material";
-
+import HomeIcon from "@mui/icons-material/Home";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 const Navbar = (props) => {
   const theme = createMuiTheme({
@@ -33,7 +34,7 @@ const Navbar = (props) => {
       <Box>
         <Drawer
           PaperProps={{
-            sx: { width: "100%", padding: "1%", paddingTop: "10%" },
+            sx: { width: "100%", padding: "1%" },
           }}
           elevation={16}
           anchor="top"

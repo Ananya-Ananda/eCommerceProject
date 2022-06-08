@@ -12,24 +12,35 @@ import axios from "axios";
 
 function BookPage(props){
     const [count, setCount] = useState(0);
+    const [docId, setDocId] = useState("");
     // React.useState(0);
     // get prop+ display whatever
     const addTo = () =>{
        setCount(count + 1);
-       if(count === 1){
+       if(count === 0){
             axios.post("http://localhost:9000/bookPage/bookInCart",{
                 title: "title",
-                author:"authorName",
-                cost:"10"
+                quantity: 1,
+                cost:"10",
+                isbn:"000000"
             })
+            .then((res) =>setDocId(res.data))
+            .catch((err)=> console.log(err))
         }
         else{
-            // axios.put
+            console.log(count+1)
+            axios.put("http://localhost:9000/bookPage/quantity",{
+                quantity:count+1,
+                id:docId
+            })
+            .catch((err)=> console.log(err))
         }
         console.log("posted")
     }
     const deleteFrom = () =>{
         setCount(Math.max(count - 1, 0));
+        console.log(count)
+        // fetch('http://localhost:9000/bookPage/deleteFrom')
         // axios.delete("") if equals 0 -> else put
     }
     const styles ={

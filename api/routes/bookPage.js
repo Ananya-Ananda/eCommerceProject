@@ -5,18 +5,27 @@ const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc, getDoc} = require
 
 router.post('/bookInCart',(req,res,next) =>{
     console.log(req.body)
-    // const newBook={
-    //     author:req.body.author,
-    //     isbn:req.body.isbn,
-    //     quantity: 0
-    // }
-    // addDoc(collection(db,"Users","testUser1","ShoppingCart",newBook))
-    // res.send("recieved");
-    // const messageRef = doc(db, "rooms", "roomA", "messages", "message1");
+    const newBook={
+        // title:req.body.author,
+        isbn:req.body.isbn,
+        quantity: req.body.quantity
+    }
+    addDoc(collection(db,"Users","testUser1","ShoppingCart"),newBook)
+    .then(function(docRef){
+        console.log("doc written with ID:",docRef.id)
+        res.send(docRef.id)
+    })
+ 
 })
 
 // update as more are added
-// router.put()
+router.put("/quantity",(req,res,next)=>{
+    console.log(req.body)
+    // get doc id
+    updateDoc(doc(db,"Users","testUser1","ShoppingCart",req.body.id),{
+        quantity: req.body.quantity
+    })
+})
 
 router.get('/cart', async (req, res, next) => {
     // console.log(res.body)

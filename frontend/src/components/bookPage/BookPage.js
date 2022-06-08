@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import CardMedia from '@mui/material/CardMedia';
 import Rating from '@mui/material/Rating';
 import IconButton from '@mui/material/IconButton';
@@ -130,7 +130,7 @@ function BookPage(props){
                     sx={{width: "auto",height:"100%"}}
                         component="img"
                         alt="book cover"
-                        image=image={book.volumeInfo.imageLinks.extraLarge}/>
+                        image={book.volumeInfo.imageLinks.extraLarge}/>
                 </div>
                 <div style={styles.rightPane}>
                     <h1>{book.volumeInfo.title}</h1>
@@ -144,7 +144,7 @@ function BookPage(props){
                             ISBN
                         </p>
                         <div style={styles.buttons}>
-                            <h2>Price</h2>
+                            <h2>${book.saleInfo.listPrice.amount}</h2>
                             <IconButton aria-label="cart">
                                 <Badge badgeContent={count} color="secondary">
                                     <ShoppingCartIcon/>
@@ -173,8 +173,6 @@ function BookPage(props){
                </div>
             </div>
           </div>
-        </div>
-      </div>
     );
   }
 }

@@ -8,6 +8,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var booksRouter = require('./routes/books');
+var bookPageRouter = require('./routes/bookPage');
 
 var app = express();
 app.use((req, res, next) => {
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/books', booksRouter);
+app.use('/bookPage', bookPageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,5 +49,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// app.get('/', (req, res) => {
+//   res.send('welcome to a simple HTTP cookie server');
+//   console.log('hi')
+// });
+
+// app.listen(8000, () => console.log('The server is running port 8000...'));
 
 module.exports = app;

@@ -9,8 +9,11 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import axios from "axios";
+import { AccessTokenContext } from "../../contexts/accessTokenContext";
 
 function BookPage(props){
+    const { accessToken, setAccessToken } = useContext(AccessTokenContext);
+    const [book, setBook] = useState();
     const [count, setCount] = useState(0);
     const [docId, setDocId] = useState("");
     // React.useState(0);
@@ -55,6 +58,19 @@ function BookPage(props){
         // fetch('http://localhost:9000/bookPage/deleteFrom')
         // axios.delete("") if equals 0 -> else put
     }
+    const getBook = async () => {
+      fetch("http://localhost:9000/books/book/" + accessToken)
+        .then((res) => res.json())
+        .then((book) => {
+          setBook(book);
+        console.log(book);
+      });
+    };
+
+    useEffect(() => {
+      getBook();
+    }, []);
+  
     const styles ={
         splitScreen: {
             flex:"1",
@@ -100,6 +116,7 @@ function BookPage(props){
     //     .catch((err) => console.log(err))
     //     console.log("rendering...")
     //   }, [])
+    if (book) {
     return(
         <div>
             {/* some navbar */}
@@ -113,14 +130,14 @@ function BookPage(props){
                     sx={{width: "auto",height:"100%"}}
                         component="img"
                         alt="book cover"
-                        image='https://cdn.pixabay.com/photo/2018/01/03/09/09/book-3057901__340.png'/>
+                        image=image={book.volumeInfo.imageLinks.extraLarge}/>
                 </div>
                 <div style={styles.rightPane}>
-                    <h1>Book Title</h1>
-                    <h2>Author Name</h2>
+                    <h1>{book.volumeInfo.title}</h1>
+                    <h2>{book.volumeInfo.authors[0]}</h2>
                     <Rating name="read-only" value={3} readOnly />
                     <p>
-                    summary
+                    {book.volumeInfo.description}
                     </p>
                     <div style={styles.splitScreen}>
                         <p style={styles.isbn}>
@@ -155,6 +172,10 @@ function BookPage(props){
                     </div>
                </div>
             </div>
+          </div>
         </div>
-    )
-}export default BookPage;
+      </div>
+    );
+  }
+}
+export default BookPage;

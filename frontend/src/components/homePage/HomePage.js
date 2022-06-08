@@ -66,7 +66,7 @@ const HomePage = () => {
                         color="text.primary"
                         gutterBottom
                       >
-                        {val.volumeInfo.authors[0]}
+                        {val.volumeInfo.authors}
                       </Typography>
                     </CardContent>
                   </CardActionArea>

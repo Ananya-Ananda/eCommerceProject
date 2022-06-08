@@ -17,7 +17,7 @@ function BookPage(props){
     // get prop+ display whatever
     const addTo = () =>{
        setCount(count + 1);
-       if(count === 0){
+       if(count+1 === 1){
             axios.post("http://localhost:9000/bookPage/bookInCart",{
                 title: "title",
                 quantity: 1,
@@ -35,11 +35,23 @@ function BookPage(props){
             })
             .catch((err)=> console.log(err))
         }
-        console.log("posted")
+        // console.log("posted")
     }
     const deleteFrom = () =>{
         setCount(Math.max(count - 1, 0));
-        console.log(count)
+        console.log(count -1)
+        if(count-1 === 0){
+            fetch('http://localhost:9000/bookPage/delete/' + docId,{
+                method:"DELETE"
+            })
+            .catch((err)=> console.log(err))
+        }
+        else if(count-1 > 0){
+            axios.put("http://localhost:9000/bookPage/quantity",{
+                quantity:count-1,
+                id:docId
+            })
+        }
         // fetch('http://localhost:9000/bookPage/deleteFrom')
         // axios.delete("") if equals 0 -> else put
     }

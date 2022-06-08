@@ -1,5 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 import CardMedia from '@mui/material/CardMedia';
+import Card from '@mui/material/Card';
 import Rating from '@mui/material/Rating';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -10,22 +11,22 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import axios from "axios";
 import { AccessTokenContext } from "../../contexts/accessTokenContext";
+import sanitizeHtml from 'sanitize-html';
+// import Sanitized from "./Sanitized";
 
 function BookPage(props){
-    const { accessToken, setAccessToken } = useContext(AccessTokenContext);
+    const {accessToken, setAccessToken } = useContext(AccessTokenContext);
     const [book, setBook] = useState();
     const [count, setCount] = useState(0);
     const [docId, setDocId] = useState("");
     // React.useState(0);
     // get prop+ display whatever
-    const addTo = () =>{
+    const addTo = (id) =>{
        setCount(count + 1);
        if(count+1 === 1){
             axios.post("http://localhost:9000/bookPage/bookInCart",{
-                title: "title",
                 quantity: 1,
-                cost:"10",
-                isbn:"000000"
+                id:id
             })
             .then((res) =>setDocId(res.data))
             .catch((err)=> console.log(err))
@@ -42,7 +43,7 @@ function BookPage(props){
     }
     const deleteFrom = () =>{
         setCount(Math.max(count - 1, 0));
-        console.log(count -1)
+        // console.log(count -1)
         if(count-1 === 0){
             fetch('http://localhost:9000/bookPage/delete/' + docId,{
                 method:"DELETE"
@@ -79,11 +80,11 @@ function BookPage(props){
             justifyContent:"space-between",
         },
         rightPane: {
-            width: '50%',
+            width: '65%',
             margin:"3%",
         },
         leftPane: {
-            width: '50%',
+            width: '35%',
             margin:"2%",
             alignItems:"center",
             justifyContent:"center",
@@ -133,15 +134,23 @@ function BookPage(props){
                         image={book.volumeInfo.imageLinks.extraLarge}/>
                 </div>
                 <div style={styles.rightPane}>
+                <Card style={{padding:"5%"}}>
                     <h1>{book.volumeInfo.title}</h1>
                     <h2>{book.volumeInfo.authors[0]}</h2>
                     <Rating name="read-only" value={3} readOnly />
+                    
                     <p>
-                    {book.volumeInfo.description}
+                    {console.log(sanitizeHtml("<img src=x onerror=alert('img') />"))}
+                        {/* {console.log(santizeHtml(book.volumeInfo.description))} */}
+                    {sanitizeHtml(book.volumeInfo.description)}
+                    {/* <Sanitized html="test <b>bold</b>" /> */}
                     </p>
+                    </Card>
                     <div style={styles.splitScreen}>
                         <p style={styles.isbn}>
-                            ISBN
+                            Published: {book.volumeInfo.publishedDate}
+                            <br></br>
+                            ISBN: {book.volumeInfo.industryIdentifiers[0].identifier}
                         </p>
                         <div style={styles.buttons}>
                             <h2>${book.saleInfo.listPrice.amount}</h2>
@@ -162,7 +171,7 @@ function BookPage(props){
                                 <Button
                                     aria-label="increase"
                                     onClick={() => {
-                                        addTo();
+                                        addTo(accessToken);
                                     }}
                                 >
                                     <AddIcon fontSize="small" />

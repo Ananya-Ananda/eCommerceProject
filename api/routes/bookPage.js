@@ -7,7 +7,7 @@ router.post('/bookInCart',(req,res,next) =>{
     // console.log(req.body)
     const newBook={
         // title:req.body.author,
-        isbn:req.body.isbn,
+        id:req.body.id,
         quantity: req.body.quantity
     }
     addDoc(collection(db,"Users","testUser1","ShoppingCart"),newBook)

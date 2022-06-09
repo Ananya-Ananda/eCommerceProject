@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-const { initializeApp } = require("firebase/app");
-const { getFirestore } = require("firebase/firestore");
- 
-const serviceAccount = require("../permissions.json");
- 
-const app = initializeApp(serviceAccount);
-const db = getFirestore(app);
- 
-module.exports = db;
-=======
 const express = require("express");
 const router = express.Router();
 const db = require("../firebase")
@@ -23,4 +12,3 @@ router.get('/password/:username', async(req,res,next) => {
 
 
 module.exports = router;
->>>>>>> df6968d3062a8b9f9f55f8f74478ce34d5ed8e91

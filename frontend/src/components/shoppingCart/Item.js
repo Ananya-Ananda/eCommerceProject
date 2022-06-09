@@ -61,7 +61,7 @@ function Item(props) {
         setQuantity(null);
     }
 
-    return (
+    return data && (
         // <div>
         //     {data? data.title + data.authors + data.image + data.price + data.currency: null}
         // </div>

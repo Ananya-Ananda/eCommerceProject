@@ -2,7 +2,7 @@ require("dotenv").config();
 var express = require("express");
 var router = express.Router();
 var fetch = require("node-fetch");
-const db = require("./firebase");
+const db = require("../firebase");
 const {getDocs, collection, doc, getDoc, addDoc, setDoc,  deleteDoc, updateDoc} = require("firebase/firestore")
 
 const api_key = process.env.apiKey;

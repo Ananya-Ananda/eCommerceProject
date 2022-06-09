@@ -5,16 +5,22 @@ import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomePage from './components/homePage/HomePage';
-import Cart from './components/homePage/Cart';
+import BookPage from './components/bookPage/BookPage';
+import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
+import ShoppingCartPage from './components/shoppingCart/shoppingCartPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <AccessTokenProvider>
   <BrowserRouter>
     <Routes>
       {/* <Route path='/' element = {<App/>}/> */}
       <Route path = '/' element={<HomePage/>}/>
+      <Route path = 'bookPage' element={<BookPage/>}/>
+      <Route path = 'shoppingCart' element={<ShoppingCartPage/>}/>
     </Routes>
   </BrowserRouter>
+  </AccessTokenProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

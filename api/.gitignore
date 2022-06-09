@@ -1,4 +1,8 @@
 node_modules
 /.env
 /package-lock.json
+<<<<<<< HEAD
 /permissions.json
+=======
+permissions.json
+>>>>>>> f607ff86394a77e5964aa5c09790a100381e65a1

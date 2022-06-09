@@ -13,6 +13,8 @@ import { AccessTokenContext } from "../../contexts/accessTokenContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../navBar/Navbar";
 import ResponsiveAppBar from "../newNav/ResponsiveAppBar";
+import Header from "../newNav/Header";
+import "./Home.css";
 
 const HomePage = () => {
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
@@ -38,18 +40,24 @@ const HomePage = () => {
   useEffect(() => {
     printBooks();
   }, []);
+  
   return (
     <>
-      <ResponsiveAppBar />
+      {/*<ResponsiveAppBar />*/}
+      <Header />
+      <img
+        className="home_image"
+        src="https://www.kaufmancountylibrary.net/wp-content/uploads/sites/26/2019/04/banner.jpg"
+      />
       <Grid container>
         {books.length > 0 &&
           books.map((val, key) => {
             return (
-              <Grid item xs={1.6} key={val.id}>
-                <Box sx={{ mx: "auto", width: 175, p: 1 }}>
+              <Grid item xs={2.2} alignItems= 'center' key={val.id}>
+                <Box sx={{ mx: "auto", width: 175, p: 1}}>
                   <Card
                     variant="outlined"
-                    style={{ margin: "auto", display: "flex" }}
+                    style={{ margin: "auto", display: "flex"}}
                   >
                     <CardActionArea onClick={(e) => onClick(e, val.id)}>
                       <CardContent
@@ -62,7 +70,7 @@ const HomePage = () => {
                           alt="artist pic"
                         />
                         <Typography
-                          sx={{ fontSize: 18, justifyContent: "center" }}
+                          sx={{ fontSize: 15, justifyContent: "center" }}
                           color="text.primary"
                           gutterBottom
                         >

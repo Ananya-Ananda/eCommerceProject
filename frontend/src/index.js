@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import HomePage from './components/homePage/HomePage';
 import BookPage from './components/bookPage/BookPage';
 import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
-import ShoppingCartPage from './components/shoppingCart/shoppingCartPage';
+import ShoppingCartPage from './components/shoppingCart/ShoppingCartPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

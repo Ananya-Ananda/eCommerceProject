@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const db = require("./firebase");
+const db = require("../firebase");
 const {getDocs, collection, doc, getDoc, addDoc, setDoc,  deleteDoc, updateDoc} = require("firebase/firestore")
 
 /* GET users listing. */

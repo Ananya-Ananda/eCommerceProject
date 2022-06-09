@@ -11,6 +11,7 @@ var shoppingCartRouter = require('./routes/shoppingCart');
 var itemRouter = require('./routes/item');
 var booksRouter = require('./routes/books');
 var bookPageRouter = require('./routes/bookPage');
+var firebaseRouter = require('./routes/firebase');
 
 var app = express();
 app.use((req, res, next) => {
@@ -37,7 +38,7 @@ app.use('/shoppingCart', shoppingCartRouter);
 app.use('/item', itemRouter);
 app.use('/books', booksRouter);
 app.use('/bookPage', bookPageRouter);
-
+app.use('/firebase', firebaseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

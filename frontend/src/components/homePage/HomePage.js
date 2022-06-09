@@ -42,7 +42,7 @@ const HomePage = () => {
     <>
       <Header />
       <Home />
-      {/*<Grid container>
+      <Grid container>
         {books.length > 0 &&
           books.map((val, key) => {
             return (
@@ -84,7 +84,6 @@ const HomePage = () => {
             );
           })}
       </Grid>
-        */}
     </>
   );
 };

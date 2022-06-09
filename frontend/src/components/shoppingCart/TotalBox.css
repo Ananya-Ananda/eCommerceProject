@@ -1,0 +1,16 @@
+.totBoxContainer {
+    text-align: center;
+    border: 0.1em solid lightgray;
+    background-color: lightgrey;
+    border-radius: 1em;
+    padding: 0.5em;
+    margin: 1em;
+}
+
+.totBoxText {
+    margin: 1em;
+}
+
+.totBoxButton {
+    margin: 1em;
+}

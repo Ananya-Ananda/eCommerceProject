@@ -10,7 +10,8 @@ router.get('/', async (req, res) => {
     // let query = await db.collection('messages').get();
     let response = []
     query.forEach((item) => {
-        response.push({id: item.id, ...item.data()})
+        response.push({firestoreId: item.id, ...item.data()})
+        // response.push({firestoreId: item.id})
     })
     return res.status(200).json(response)
   }

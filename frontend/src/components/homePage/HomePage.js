@@ -12,7 +12,6 @@ import ShoppingCartPage from '../shoppingCart/ShoppingCartPage';
 const HomePage = () => {
   return (
     <div>
-      Test
       <ShoppingCartPage login={true} />
     <Grid item xs={2.4}>
       <Box sx={{ mx: "auto", width: 250, p: 1 }}>

@@ -10,8 +10,9 @@ import {
 } from "@mui/material";
 import { AccessTokenContext } from "../../contexts/accessTokenContext";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../navBar/Navbar";
 import ResponsiveAppBar from "../newNav/ResponsiveAppBar";
+import Header from "../newNav/Header";
+import Home from "./Home";
 
 const HomePage = () => {
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
@@ -39,8 +40,9 @@ const HomePage = () => {
   }, []);
   return (
     <>
-      <ResponsiveAppBar />
-      <Grid container>
+      <Header />
+      <Home />
+      {/*<Grid container>
         {books.length > 0 &&
           books.map((val, key) => {
             return (
@@ -82,6 +84,7 @@ const HomePage = () => {
             );
           })}
       </Grid>
+        */}
     </>
   );
 };

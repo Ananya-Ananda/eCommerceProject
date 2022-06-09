@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var booksRouter = require('./routes/books');
 var bookPageRouter = require('./routes/bookPage');
+var firebaseRouter = require('./routes/firebase');
 
 var app = express();
 app.use((req, res, next) => {
@@ -33,7 +34,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/books', booksRouter);
 app.use('/bookPage', bookPageRouter);
-
+app.use('/firebase', firebaseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

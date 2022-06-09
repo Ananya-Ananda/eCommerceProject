@@ -8,6 +8,7 @@ import {
   Button,
   CardActionArea,
 } from "@mui/material";
+import ShoppingCartPage from '../shoppingCart/ShoppingCartPage';
 import { AccessTokenContext } from "../../contexts/accessTokenContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../navBar/Navbar";

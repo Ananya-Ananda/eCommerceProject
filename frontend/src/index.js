@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import HomePage from './components/homePage/HomePage';
 import BookPage from './components/bookPage/BookPage';
 import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
+import ShoppingCartPage from './components/shoppingCart/ShoppingCartPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
       {/* <Route path='/' element = {<App/>}/> */}
       <Route path = '/' element={<HomePage/>}/>
       <Route path = 'bookPage' element={<BookPage/>}/>
+      <Route path = 'shoppingCart' element={<ShoppingCartPage/>}/>
     </Routes>
   </BrowserRouter>
   </AccessTokenProvider>

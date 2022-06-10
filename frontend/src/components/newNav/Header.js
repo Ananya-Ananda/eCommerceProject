@@ -22,7 +22,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-function Header() {
+function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState();
   const { login, setLogin } = useContext(LoginContext);

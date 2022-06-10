@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var app = express();
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 var indexRouter = require('./routes/index');
@@ -15,8 +16,6 @@ var booksRouter = require('./routes/books');
 var bookPageRouter = require('./routes/bookPage');
 var checkoutRouter = require('./routes/checkout');
 var firebaseRouter = require('./routes/firebase');
-
-var app = express();
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

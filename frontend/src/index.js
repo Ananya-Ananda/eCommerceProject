@@ -7,9 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import HomePage from './components/homePage/HomePage';
 import BookPage from './components/bookPage/BookPage';
 import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
+import LoginProvider, { LoginContext } from './contexts/loginContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <LoginProvider>
   <AccessTokenProvider>
   <BrowserRouter>
     <Routes>
@@ -19,6 +21,7 @@ root.render(
     </Routes>
   </BrowserRouter>
   </AccessTokenProvider>
+  </LoginProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

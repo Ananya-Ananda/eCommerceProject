@@ -14,10 +14,10 @@ function Checkout(){
         }
     }
     async function getPaymentInfo(){
-        const response = await fetch('http://localhost:9000/checkout/paymentInfo');
+        const response = await fetch('/checkout/paymentInfo');
         const body = await response.json();
         if(body.result === undefined){
-            axios.post('http://localhost:9000/checkout/payment',{
+            axios.post('/checkout/payment',{
                 username:"Ananya",
             })
         }
@@ -25,10 +25,10 @@ function Checkout(){
     }
 
     async function getShippingInfo(){
-        const response = await fetch('http://localhost:9000/checkout/shippingInfo');
+        const response = await fetch('/checkout/shippingInfo');
         const body = await response.json();
         if(body.result === undefined){
-            axios.post('http://localhost:9000/checkout/shipping',{
+            axios.post('/checkout/shipping',{
                 username:"Ananya",
             })
         }

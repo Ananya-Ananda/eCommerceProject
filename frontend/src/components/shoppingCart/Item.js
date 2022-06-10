@@ -20,7 +20,7 @@ function Item(props) {
 
     useEffect(() => {
         let subData = [];
-        axios.get("http://localhost:9000/item/" + id)
+        axios.get("/item/" + id)
         .then((res) => {
             let item = res.data;
             console.log(item);
@@ -31,7 +31,7 @@ function Item(props) {
         })
 
         // console.log(firestoreId);
-        // axios.get("http://localhost:9000/item/" + firestoreId + "/quantity")
+        // axios.get("/item/" + firestoreId + "/quantity")
         // .then((res) => {
         //     let num = res.data.quantity;
         //     setQuantity(num);
@@ -39,7 +39,7 @@ function Item(props) {
     }, [])
 
     const increaseQuantity = () => {
-        axios.put("http://localhost:9000/item/" + firestoreId + "/quantity/" + login.user, {
+        axios.put("/item/" + firestoreId + "/quantity/" + login.user, {
             newQuantity: quantity + 1
         })
         setQuantity(subQuantity => subQuantity + 1)
@@ -48,7 +48,7 @@ function Item(props) {
 
     const decreaseQuantity = () => {
         if (quantity > 1) {
-            axios.put("http://localhost:9000/item/" + firestoreId + "/quantity/" + login.user, {
+            axios.put("/item/" + firestoreId + "/quantity/" + login.user, {
                 newQuantity: quantity - 1
             })
             setQuantity(subQuantity => subQuantity - 1)
@@ -57,7 +57,7 @@ function Item(props) {
     }
 
     const deleteItem = () => {
-        axios.delete("http://localhost:9000/item/" + firestoreId + "/delete/" + login.user)
+        axios.delete("/item/" + firestoreId + "/delete/" + login.user)
         props.changeTotal(-1*data.price*quantity);
         setData(null);
         setQuantity(null);

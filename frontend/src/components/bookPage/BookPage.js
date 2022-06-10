@@ -28,7 +28,7 @@ function BookPage(props){
     const addTo = (id) =>{
        setCount(count + 1);
        if(count+1 === 1){
-            axios.post("http://localhost:9000/bookPage/bookInCart/" + login.user,{
+            axios.post("/bookPage/bookInCart/" + login.user,{
                 quantity: 1,
                 id:id
             })
@@ -37,7 +37,7 @@ function BookPage(props){
         }
         else{
             console.log(count+1)
-            axios.put("http://localhost:9000/bookPage/quantity/" + login.user,{
+            axios.put("/bookPage/quantity/" + login.user,{
                 quantity:count+1,
                 id:docId
             })
@@ -49,22 +49,22 @@ function BookPage(props){
         setCount(Math.max(count - 1, 0));
         // console.log(count -1)
         if(count-1 === 0){
-            fetch('http://localhost:9000/bookPage/delete/' + docId + "/" + login.user,{
+            fetch('/bookPage/delete/' + docId + "/" + login.user,{
                 method:"DELETE"
             })
             .catch((err)=> console.log(err))
         }
         else if(count-1 > 0){
-            axios.put("http://localhost:9000/bookPage/quantity/" + login.user,{
+            axios.put("/bookPage/quantity/" + login.user,{
                 quantity:count-1,
                 id:docId
             })
         }
-        // fetch('http://localhost:9000/bookPage/deleteFrom')
+        // fetch('/bookPage/deleteFrom')
         // axios.delete("") if equals 0 -> else put
     }
     const getBook = async () => {
-      fetch("http://localhost:9000/books/book/" + accessToken)
+      fetch("/books/book/" + accessToken)
         .then((res) => res.json())
         .then((book) => {
           setBook(book);
@@ -119,7 +119,7 @@ function BookPage(props){
         }
     }
     // useEffect(() => {
-    //     fetch("http://localhost:9000/bookPage/cart")
+    //     fetch("/bookPage/cart")
     //     .then((res) => res.json())
     //     .then((text) => setCart(text.result))
     //     .catch((err) => console.log(err))

@@ -16,7 +16,7 @@ function Cart(props) {
     useEffect(() => {
         console.log(login)
         let subCart = [];
-        axios.get("http://localhost:9000/shoppingCart/" + login.user)
+        axios.get("/shoppingCart/" + login.user)
         .then((res) => {
             console.log(res.data);
             res.data.forEach((item) => {

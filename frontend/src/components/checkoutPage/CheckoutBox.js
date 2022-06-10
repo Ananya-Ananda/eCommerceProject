@@ -33,7 +33,7 @@ function CheckoutBox ({shipping, payment}){
     const saveInfo=()=>{
         if(saved){
             if(shipping){
-                axios.put("http://localhost:9000/checkout/shippingUpdates",{
+                axios.put("/checkout/shippingUpdates",{
                     firstName: firstName,
                     lastName: lastName,
                     street:street,
@@ -43,7 +43,7 @@ function CheckoutBox ({shipping, payment}){
                 })
             }
             if(payment){
-                axios.put("http://localhost:9000/checkout/paymentUpdates",{
+                axios.put("/checkout/paymentUpdates",{
                     name:fullName,
                     number:cardNum,
                     date:eDate,

@@ -15,6 +15,8 @@ var checkoutRouter = require('./routes/checkout');
 var firebaseRouter = require('./routes/firebase');
 
 var app = express();
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");

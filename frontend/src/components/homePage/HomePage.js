@@ -23,7 +23,7 @@ const HomePage = () => {
   let navigate = useNavigate();
 
   const printBooks = async () => {
-    fetch("http://localhost:9000/books/")
+    fetch("/books/")
       .then((res) => res.json())
       .then((books) => {
         setBooks(books.items);

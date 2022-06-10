@@ -50,7 +50,7 @@ function Header() {
 
   const checkLogged = async () => {
     const pass = await fetch(
-      "http://localhost:9000/firebase/password/" + userForm.current.value
+      "/firebase/password/" + userForm.current.value
     )
       .then((res) => res.json())
       .then((data) => data.password);

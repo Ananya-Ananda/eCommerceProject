@@ -6,8 +6,10 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import HomePage from './components/homePage/HomePage';
 import BookPage from './components/bookPage/BookPage';
+// import ShoppingCartPage from './components/shoppingCartPage/ShoppingCartPage';
 import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
 import LoginProvider, { LoginContext } from './contexts/loginContext';
+import Checkout from './components/checkoutPage/Checkout'
 import ShoppingCartPage from './components/shoppingCart/ShoppingCartPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,7 +20,8 @@ root.render(
     <Routes>
       {/* <Route path='/' element = {<App/>}/> */}
       <Route path = '/' element={<HomePage/>}/>
-      <Route path = 'bookPage' element={<BookPage/>}/>
+      <Route path = 'bookpage' element={<BookPage/>}/>
+      <Route path = 'checkout' element={<Checkout/>}/>
       <Route path = 'shoppingCart' element={<ShoppingCartPage/>}/>
     </Routes>
   </BrowserRouter>

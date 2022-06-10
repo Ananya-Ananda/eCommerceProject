@@ -1,20 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import Item from './Item';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List'
-
+import { LoginContext } from "../../contexts/loginContext";
 
 function Cart(props) {
     const isLoggedIn = props.login;
     const [total, setTotal] = useState(0);
     const [cart, setCart] = useState();
+    const { login, setLogin } = useContext(LoginContext);
     // let cart = [];
 
     useEffect(() => {
+        console.log(login)
         let subCart = [];
-        axios.get("http://localhost:9000/shoppingCart/")
+        axios.get("http://localhost:9000/shoppingCart/" + login.user)
         .then((res) => {
             console.log(res.data);
             res.data.forEach((item) => {

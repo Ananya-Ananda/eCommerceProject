@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../firebase")
-const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc, getDoc} = require("firebase/firestore")
+const {collection, addDoc, deleteDoc, doc, updateDoc} = require("firebase/firestore")
 
-router.post('/bookInCart',(req,res,next) =>{
+router.post('/bookInCart/:user',(req,res,next) =>{
     // console.log(req.body)
     const newBook={
         // title:req.body.author,
         id:req.body.id,
         quantity: req.body.quantity
     }
-    addDoc(collection(db,"Users","testUser1","ShoppingCart"),newBook)
+    addDoc(collection(db,"Users",req.params.user,"ShoppingCart"),newBook)
     .then(function(docRef){
         // console.log("doc written with ID:",docRef.id)
         res.send(docRef.id)
@@ -19,14 +19,14 @@ router.post('/bookInCart',(req,res,next) =>{
 })
 
 // update as more are added
-router.put("/quantity",(req,res,next)=>{
+router.put("/quantity/:user",(req,res,next)=>{
     // console.log(req.body)
-    updateDoc(doc(db,"Users","testUser1","ShoppingCart",req.body.id),{
+    updateDoc(doc(db,"Users",req.params.user,"ShoppingCart",req.body.id),{
         quantity: req.body.quantity
     })
 })
 
-router.delete('/delete/:id', (req, res, next) => {
-    deleteDoc(doc(db,"Users","testUser1","ShoppingCart",req.params.id))
+router.delete('/delete/:id/:user', (req, res, next) => {
+    deleteDoc(doc(db,"Users",req.params.user,"ShoppingCart",req.params.id))
 })
 module.exports = router;

@@ -34,15 +34,15 @@ router.get('/:bookId/quantity', async (req, res, next) => {
   }
 })
 
-router.put("/:bookId/quantity",(req,res,next)=>{
+router.put("/:bookId/quantity/:user",(req,res,next)=>{
   // console.log(req.body)
-  updateDoc(doc(db,"Users","testUser1","ShoppingCart",req.params.bookId),{
+  updateDoc(doc(db,"Users",req.params.user,"ShoppingCart",req.params.bookId),{
       quantity: req.body.newQuantity
   })
 })
 
-router.delete('/:bookId/delete', (req, res, next) => {
-  deleteDoc(doc(db,"Users","testUser1","ShoppingCart",req.params.bookId))
+router.delete('/:bookId/delete/:user', (req, res, next) => {
+  deleteDoc(doc(db,"Users",req.params.user,"ShoppingCart",req.params.bookId))
 })
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography'
 import { Button } from '@mui/material';
+import { LoginContext } from "../../contexts/loginContext";
 // import DeleteIcon from '@material-ui/icons/Delete'
 
 function Item(props) {
@@ -15,6 +16,7 @@ function Item(props) {
     const id = props.id;
     const [quantity, setQuantity] = useState(props.quantity);
     const [data, setData] = useState();
+    const { login, setLogin } = useContext(LoginContext);
 
     useEffect(() => {
         let subData = [];
@@ -37,7 +39,7 @@ function Item(props) {
     }, [])
 
     const increaseQuantity = () => {
-        axios.put("http://localhost:9000/item/" + firestoreId + "/quantity", {
+        axios.put("http://localhost:9000/item/" + firestoreId + "/quantity/" + login.user, {
             newQuantity: quantity + 1
         })
         setQuantity(subQuantity => subQuantity + 1)
@@ -46,7 +48,7 @@ function Item(props) {
 
     const decreaseQuantity = () => {
         if (quantity > 1) {
-            axios.put("http://localhost:9000/item/" + firestoreId + "/quantity", {
+            axios.put("http://localhost:9000/item/" + firestoreId + "/quantity/" + login.user, {
                 newQuantity: quantity - 1
             })
             setQuantity(subQuantity => subQuantity - 1)
@@ -55,7 +57,7 @@ function Item(props) {
     }
 
     const deleteItem = () => {
-        axios.delete("http://localhost:9000/item/" + firestoreId + "/delete")
+        axios.delete("http://localhost:9000/item/" + firestoreId + "/delete/" + login.user)
         props.changeTotal(-1*data.price*quantity);
         setData(null);
         setQuantity(null);

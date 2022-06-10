@@ -40,7 +40,7 @@ const HomePage = () => {
   useEffect(() => {
     printBooks();
   }, []);
-  
+
   return (
     <>
       {/*<ResponsiveAppBar />*/}

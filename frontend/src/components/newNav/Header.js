@@ -15,15 +15,17 @@ import {
   TextField,
 } from "@mui/material";
 import { LoginContext } from "../../contexts/loginContext";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState();
   const { login, setLogin } = useContext(LoginContext);
-  const [isLog, setIsLog] = useState(false)
+  const [isLog, setIsLog] = useState(login.isLogged)
 
   const userForm = useRef("");
   const passForm = useRef("");
+  let navigate = useNavigate();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -36,6 +38,15 @@ function Header() {
       user: "",
     });
   };
+
+  const cartClick = () => {
+    if (isLog) {
+      navigate("/shoppingCart")
+    }
+    else {
+      setIsOpen(!isOpen)
+    }
+  }
 
   const checkLogged = async () => {
     const pass = await fetch(
@@ -90,10 +101,10 @@ function Header() {
               </div>
             </ButtonBase>
           )}
-          <ButtonBase>
+          <ButtonBase onClick = {cartClick}>
             <div className="header_optionBasket">
               <ShoppingBasketIcon />
-              <span className="header_optionLineTwo header_basketCount">0</span>
+              {/*<span className="header_optionLineTwo header_basketCount">0</span>*/}
             </div>
           </ButtonBase>
         </div>

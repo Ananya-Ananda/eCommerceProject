@@ -7,6 +7,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var shoppingCartRouter = require('./routes/shoppingCart');
+var itemRouter = require('./routes/item');
 var booksRouter = require('./routes/books');
 var bookPageRouter = require('./routes/bookPage');
 var firebaseRouter = require('./routes/firebase');
@@ -32,6 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/shoppingCart', shoppingCartRouter);
+app.use('/item', itemRouter);
 app.use('/books', booksRouter);
 app.use('/bookPage', bookPageRouter);
 app.use('/firebase', firebaseRouter);

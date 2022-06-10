@@ -9,7 +9,7 @@ import BookPage from './components/bookPage/BookPage';
 // import ShoppingCartPage from './components/shoppingCartPage/ShoppingCartPage';
 import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
 import Checkout from './components/checkoutPage/Checkout'
-
+import ShoppingCartPage from './components/shoppingCart/ShoppingCartPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,8 +19,8 @@ root.render(
       {/* <Route path='/' element = {<App/>}/> */}
       <Route path = '/' element={<HomePage/>}/>
       <Route path = 'bookpage' element={<BookPage/>}/>
-      {/* <Route path = 'shoppingCartPage' element={<ShoppingCartPage/>}/> */}
       <Route path = 'checkout' element={<Checkout/>}/>
+      <Route path = 'shoppingCart' element={<ShoppingCartPage/>}/>
     </Routes>
   </BrowserRouter>
   </AccessTokenProvider>

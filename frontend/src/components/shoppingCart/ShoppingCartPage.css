@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    text-align: center;
+}
+
+.cart {
+    width: 75%;
+}
+
+.totalBox {
+    width: 25%;
+}

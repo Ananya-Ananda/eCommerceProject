@@ -1,8 +1,11 @@
 import axios from 'axios';
-import React,{useEffect,useState,Component} from 'react';
+import React,{useEffect,useState,useContext} from 'react';
 import CheckoutBox from './CheckoutBox';
+// ../../contexts/loginContext";
 
 function Checkout(){
+    // const { login, setLogin } = useContext(LoginContext);
+    // const [isLog, setIsLog] = useState(login.isLogged)
     const[payment,setPayment] = useState();
     const[shipping,setShipping] = useState();
 

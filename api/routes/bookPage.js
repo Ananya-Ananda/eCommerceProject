@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../firebase")
-const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc, getDoc} = require("firebase/firestore")
+const {collection, addDoc, deleteDoc, doc, updateDoc} = require("firebase/firestore")
 
 router.post('/bookInCart',(req,res,next) =>{
     // console.log(req.body)

@@ -2,7 +2,6 @@ require("dotenv").config();
 const {initializeApp} = require("firebase/app")
 var express = require('express');
 var router = express.Router();
-const db = require("../firebase");
 const {getDocs, collection, doc, getDoc, addDoc, setDoc,  deleteDoc, updateDoc, getFirestore} = require("firebase/firestore")
 
 const firebaseApp = initializeApp(

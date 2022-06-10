@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Divider from '@mui/material/Divider'
 import { Autocomplete } from '@mui/material';
 import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 
 const usStates = ['AL','AK','AZ','AR','CA','CO','CT','DE',
 'FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
@@ -66,7 +67,48 @@ function CheckoutBox (props){
 
     const saveInfo=()=>{
         if(saved){
-            
+            if(shipping){
+                axios.put("http://localhost:9000/checkout/shippingUpdates",{
+                    firstName: firstName,
+                    lastName: lastName,
+                    street:street,
+                    city:city,
+                    state:state,
+                    zip:zip,
+                })
+            }
+            if(payment){
+                axios.put("http://localhost:9000/checkout/paymentUpdates",{
+                    name:fullName,
+                    number:cardNum,
+                    date:eDate,
+                    cvv:cvv,
+                    saved:saved
+                })
+            }
+            if(!(payment || shipping)){
+                axios.post("http://localhost:9000/checkout/post",{
+                    firstName: firstName,
+                    lastName: lastName,
+                    street:street,
+                    city:city,
+                    state:state,
+                    zip:zip,
+                    name:fullName,
+                    number:cardNum,
+                    date:eDate,
+                    cvv:cvv,
+                    saved:saved
+                })
+            }
+
+            //     axios.post("http://localhost:9000/bookPage/bookInCart",{
+            //         quantity: 1,
+            //         id:id
+            //     })
+            //     .then((res) =>setDocId(res.data))
+            //     .catch((err)=> console.log(err))
+            // }
         }
         // console.log("not saved")
     }

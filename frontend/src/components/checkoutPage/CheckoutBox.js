@@ -9,8 +9,7 @@ import React,{useState,useEffect,componentDidMount} from 'react';
 import axios from 'axios';
 import {usStates,styles} from './helper';
 
-function CheckoutBox ({shipping, payment}){ 
-    
+function CheckoutBox ({shipping, payment, user}){
     // shipping info
     // const [payment,setPayment] = useState(props.payment);
     // const {shipping,payment} = props;
@@ -29,11 +28,11 @@ function CheckoutBox ({shipping, payment}){
 
     // save checkout info?
     const[saved,setSaved] = useState(payment.saved);
-
     const saveInfo=()=>{
         if(saved){
             if(shipping){
                 axios.put("/checkout/shippingUpdates",{
+                    user:user,
                     firstName: firstName,
                     lastName: lastName,
                     street:street,
@@ -44,6 +43,7 @@ function CheckoutBox ({shipping, payment}){
             }
             if(payment){
                 axios.put("/checkout/paymentUpdates",{
+                    user:user,
                     name:fullName,
                     number:cardNum,
                     date:eDate,
@@ -55,6 +55,10 @@ function CheckoutBox ({shipping, payment}){
         }
         alert("Thank you for your purchase:)")
     }
+    // const clearShoppingCart = () =>{
+    //     // fetch("/checkout/delete/" + user)
+    //     // .catch((err) => console.log(err))
+    // }
     return(
     <Card style ={styles.container}>
         <div>
@@ -88,8 +92,12 @@ function CheckoutBox ({shipping, payment}){
             </div>
             <Divider></Divider>
             {/* <h4>Total Price: $___</h4> */}
-            <FormControlLabel control={<Checkbox checked={saved} onChange={(e)=>setSaved(e.target.checked)}/>} label="Save checkout information" />
-            <Button fullWidth variant="contained" onClick={()=>saveInfo()}>Place order</Button>
+            <FormControlLabel control={<Checkbox checked={saved} onChange={(e)=>
+                setSaved(e.target.checked)
+                }/>} label="Save checkout information" />
+            <Button fullWidth variant="contained" onClick={()=>
+                saveInfo()
+            }>Place order</Button>
             {/* onClick-> route to a thank you for your purchase page? */}
        </div>
     </Card>

@@ -16,12 +16,18 @@ import {
 } from "@mui/material";
 import { LoginContext } from "../../contexts/loginContext";
 import { useNavigate } from "react-router-dom";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState();
   const { login, setLogin } = useContext(LoginContext);
   const [isLog, setIsLog] = useState(login.isLogged)
+  const [searchTerm, setSearchTerm] = useState(""); 
 
   const userForm = useRef("");
   const passForm = useRef("");
@@ -46,6 +52,12 @@ function Header() {
     else {
       setIsOpen(!isOpen)
     }
+  }
+
+  const [category, setCategory] = useState('');
+
+  const handleChange = (input) => {
+    props.getCategory(input);
   }
 
   const checkLogged = async () => {
@@ -82,11 +94,29 @@ function Header() {
           </ButtonBase>
           {/* Logo */}
         </div>
-
         <div className="header_nav">
           <ButtonBase>
             <div className="header_option">
-              <span className="header_optionLineTwo">Categories</span>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={category}
+                    label="Category"
+                    onChange={(category) => handleChange(category.target.value)}
+                  >
+                    <MenuItem value={" "}>General</MenuItem>
+                    <MenuItem value={"fantasy"}>Fantasy</MenuItem>
+                    <MenuItem value={"drama"}>Drama</MenuItem>
+                    <MenuItem value={"comedy"}>Comedy</MenuItem>
+                    <MenuItem value={"romance"}>Romance</MenuItem>
+                    <MenuItem value={"nonfiction"}>Non-Fiction</MenuItem>
+                    {/* <MenuItem value={30}>Thirty</MenuItem> */}
+                  </Select>
+                </FormControl>
+              </Box>
             </div>
           </ButtonBase>
           {isLog == true && (

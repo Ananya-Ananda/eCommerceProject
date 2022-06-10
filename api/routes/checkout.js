@@ -22,11 +22,11 @@ const firebaseApp = initializeApp(
 const db = getFirestore(firebaseApp)
 
 
-router.get('/paymentInfo',  async (req, res, next) => {
-    //  updateDoc(doc(db,"Users","testUser1","ShoppingCart",req.body.id),{
+router.get('/paymentInfo/:user',  async (req, res, next) => {
+    // console.log(req.params)
     try{
         let response=[]
-        let query = await getDoc(doc(db, "Users","Ananya","Checkout","Payment"))
+        let query = await getDoc(doc(db, "Users",req.params.user,"Checkout","Payment"))
         // let response = query.data();
         return res.json({result:query.data()})
         
@@ -37,9 +37,9 @@ router.get('/paymentInfo',  async (req, res, next) => {
     
 }
 )
-router.get('/shippingInfo',  async (req, res, next) => {
+router.get('/shippingInfo/:user',  async (req, res, next) => {
     try{
-        let query = await getDoc(doc(db, "Users","Ananya","Checkout","Shipping"))
+        let query = await getDoc(doc(db, "Users",req.params.user,"Checkout","Shipping"))
         return res.json({result:query.data()})
         
     } catch(error){
@@ -50,8 +50,8 @@ router.get('/shippingInfo',  async (req, res, next) => {
 }
 )
 router.post('/shipping',(req,res,next) =>{
-    console.log(req.body)
-    const docRef = setDoc(doc(db,"Users","Ananya","Checkout","Shipping"),{
+    // console.log(req.body)
+    const docRef = setDoc(doc(db,"Users",req.user,"Checkout","Shipping"),{
         firstName:"",
         lastName: "",
         street:"",
@@ -62,8 +62,8 @@ router.post('/shipping',(req,res,next) =>{
 })
 
 router.post('/payment',(req,res,next) =>{
-    console.log(req.body)
-    const docRef = setDoc(doc(db,"Users","Ananya","Checkout","Payment"),{
+    // console.log(req.body)
+    const docRef = setDoc(doc(db,"Users",req.user,"Checkout","Payment"),{
         name:"",
         number:"",
         date:"",
@@ -74,7 +74,8 @@ router.post('/payment',(req,res,next) =>{
 
 // // update as more are added
 router.put("/shippingUpdates",(req,res,next)=>{
-    updateDoc(doc(db,"Users","Ananya","Checkout","Shipping"),{
+    // console.log(req.body.user)
+    updateDoc(doc(db,"Users",req.body.user,"Checkout","Shipping"),{
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         street:req.body.street,
@@ -85,8 +86,8 @@ router.put("/shippingUpdates",(req,res,next)=>{
 })
 
 router.put("/paymentUpdates",(req,res,next)=>{
-    console.log(req.body)
-    updateDoc(doc(db,"Users","Ananya","Checkout","Payment"),{
+    // console.log(req.user)
+    updateDoc(doc(db,"Users",req.body.user,"Checkout","Payment"),{
         name:req.body.name,
         number:req.body.number,
         date:req.body.date,
@@ -94,4 +95,13 @@ router.put("/paymentUpdates",(req,res,next)=>{
         saved:req.body.saved
     })
 })
+
+// router.get('/delete/:user', async (req, res, next) => {
+//     const docs = await getDocs(collection(db,"Users",req.params.user,"ShoppingCart"))
+//     docs.forEach((doc) => 
+//      deleteDoc(doc.data().id)
+//     // console.log(doc.data().id)
+//     )
+    
+// })
 module.exports = router;

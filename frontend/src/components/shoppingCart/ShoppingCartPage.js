@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Cart from './Cart';
 import TotalBox from './TotalBox'
 import './ShoppingCartPage.css'
+import {Helmet} from "react-helmet";
 
 function ShoppingCartPage(props) {
     const isLoggedIn = props.login;
@@ -9,6 +10,11 @@ function ShoppingCartPage(props) {
     
     return (
         <div className='container'>
+            <Helmet>
+                <title>
+                    LSE Book - Shopping Cart
+                </title>
+            </Helmet>
             <div className='cart'>
                 <Cart login={isLoggedIn} getTotal={(newTotal) => setTotal(newTotal)}></Cart>
             </div>

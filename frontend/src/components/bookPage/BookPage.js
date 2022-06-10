@@ -14,6 +14,7 @@ import { AccessTokenContext } from "../../contexts/accessTokenContext";
 import sanitizeHtml from 'sanitize-html';
 import { LoginContext } from "../../contexts/loginContext";
 import { useNavigate } from "react-router-dom";
+import {Helmet} from "react-helmet";
 // import Sanitized from "./Sanitized";
 
 function BookPage(props){
@@ -128,6 +129,9 @@ function BookPage(props){
     if (book) {
     return(
         <div>
+            <Helmet>
+                <title>LSE Books - {book.volumeInfo.title}</title>
+            </Helmet>
             {/* some navbar */}
             <div style={styles.cart}>
                 <Button endIcon={<ShoppingCartIcon/>} onClick = {toCart}>Go to cart</Button>

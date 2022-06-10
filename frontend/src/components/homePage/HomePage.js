@@ -15,6 +15,7 @@ import Navbar from "../navBar/Navbar";
 import ResponsiveAppBar from "../newNav/ResponsiveAppBar";
 import Header from "../newNav/Header";
 import "./Home.css";
+import {Helmet} from "react-helmet";
 
 const HomePage = () => {
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
@@ -46,6 +47,10 @@ const HomePage = () => {
   return (
     <>
       {/*<ResponsiveAppBar />*/}
+      <Helmet>
+        <title>LSE Books - Homepage</title>
+      </Helmet>
+      <Header />
       <Header getCategory={(val) => setCategory(val)}/>
       <img
         className="home_image"

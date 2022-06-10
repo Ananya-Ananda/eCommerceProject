@@ -4,6 +4,7 @@ import CheckoutBox from './CheckoutBox';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../contexts/loginContext";
+import {Helmet} from "react-helmet";
 
 function Checkout(){
     const {login, setLogin } = useContext(LoginContext);
@@ -47,8 +48,12 @@ function Checkout(){
     if(shipping && payment && login.user){
         return(
         <div style={styles.container}>
-             <Button variant='contained'component={Link} to="/shoppingCart">Back to Cart</Button>
-            <CheckoutBox payment={payment} shipping={shipping} user={login.user}/>         
+            <Helmet>
+                <title>LSE Books - Checkout</title>
+            </Helmet>   
+                <Button variant='contained'component={Link} to="/shoppingCart">Back to Cart</Button>
+                <CheckoutBox payment={payment} shipping={shipping} user={login.user}/>   
+               
         </div>
     )
     }

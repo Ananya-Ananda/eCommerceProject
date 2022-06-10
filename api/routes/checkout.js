@@ -51,7 +51,7 @@ router.get('/shippingInfo/:user',  async (req, res, next) => {
 )
 router.post('/shipping',(req,res,next) =>{
     // console.log(req.body)
-    const docRef = setDoc(doc(db,"Users",req.user,"Checkout","Shipping"),{
+    const docRef = setDoc(doc(db,"Users",req.body.user,"Checkout","Shipping"),{
         firstName:"",
         lastName: "",
         street:"",
@@ -63,7 +63,7 @@ router.post('/shipping',(req,res,next) =>{
 
 router.post('/payment',(req,res,next) =>{
     // console.log(req.body)
-    const docRef = setDoc(doc(db,"Users",req.user,"Checkout","Payment"),{
+    const docRef = setDoc(doc(db,"Users",req.body.user,"Checkout","Payment"),{
         name:"",
         number:"",
         date:"",

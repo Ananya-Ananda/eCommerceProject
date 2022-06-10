@@ -77,7 +77,9 @@ function Header() {
 
         <div className="header_search">
           <input className="header_searchInput" type="text" />
+          <ButtonBase>
           <SearchIcon className="header_searchIcon" />
+          </ButtonBase>
           {/* Logo */}
         </div>
 

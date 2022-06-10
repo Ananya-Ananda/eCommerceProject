@@ -1,9 +1,10 @@
-import React,{useEffect,useState} from 'react';
+import axios from 'axios';
+import React,{useEffect,useState,Component} from 'react';
 import CheckoutBox from './CheckoutBox';
 
 function Checkout(){
-    const[payment,setPayment] = useState([]);
-    const[shipping,setShipping] = useState([]);
+    const[payment,setPayment] = useState();
+    const[shipping,setShipping] = useState();
 
     const styles={
         container: {
@@ -12,30 +13,37 @@ function Checkout(){
             justifyContent:"center"
         }
     }
+    async function getPaymentInfo(){
+        const response = await fetch('http://localhost:9000/checkout/paymentInfo');
+        const body = await response.json();
+        if(body.result === undefined){
+            axios.post('http://localhost:9000/checkout/payment',{
+                username:"Ananya",
+            })
+        }
+        setPayment(body.result)
+    }
+
+    async function getShippingInfo(){
+        const response = await fetch('http://localhost:9000/checkout/shippingInfo');
+        const body = await response.json();
+        if(body.result === undefined){
+            axios.post('http://localhost:9000/checkout/shipping',{
+                username:"Ananya",
+            })
+        }
+        setShipping(body.result)
+    }
+
     useEffect(() => {
-        async function getPaymentInfo(){
-            // const allInfo = [];
-            const response = await fetch('http://localhost:9000/checkout/paymentInfo');
-            const body = await response.json();
-            // allInfo.push(body.result.name)
-            // allInfo.push(body.result.number)
-            // allInfo.push(body.result.date)
-            // allInfo.push(body.result.cvv)
-            setPayment(body.result);
-        }
-        async function getShippingInfo(){
-            // const allInfo = [];
-            const response = await fetch('http://localhost:9000/checkout/shippingInfo');
-            const body = await response.json();
-            setShipping(body.result);
-        }
         getPaymentInfo();
         getShippingInfo();
     }, [])
-    return(
+    if(shipping && payment){
+        return(
         <div style={styles.container}>
-            {/* props-> credit card info, if saved*/}
-            <CheckoutBox payment={payment} shipping={shipping}/>
+            <CheckoutBox payment={payment} shipping={shipping}/>         
         </div>
     )
+    }
 }export default Checkout;

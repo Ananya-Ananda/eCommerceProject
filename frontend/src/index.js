@@ -9,6 +9,8 @@ import BookPage from './components/bookPage/BookPage';
 // import ShoppingCartPage from './components/shoppingCartPage/ShoppingCartPage';
 import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
 import Checkout from './components/checkoutPage/Checkout'
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AccessTokenProvider>

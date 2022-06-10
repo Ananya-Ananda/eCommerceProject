@@ -19,11 +19,12 @@ import "./Home.css";
 const HomePage = () => {
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
   const [books, setBooks] = useState([]);
+  const [category, setCategory] = useState("");
 
   let navigate = useNavigate();
 
   const printBooks = async () => {
-    fetch("http://localhost:9000/books/")
+    fetch("http://localhost:9000/books/" + category)
       .then((res) => res.json())
       .then((books) => {
         setBooks(books.items);
@@ -38,13 +39,14 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    console.log(category);
     printBooks();
-  }, []);
+  }, [category]);
   
   return (
     <>
       {/*<ResponsiveAppBar />*/}
-      <Header />
+      <Header getCategory={(val) => setCategory(val)}/>
       <img
         className="home_image"
         src="https://www.kaufmancountylibrary.net/wp-content/uploads/sites/26/2019/04/banner.jpg"

@@ -50,7 +50,6 @@ const HomePage = () => {
       <Helmet>
         <title>LSE Books - Homepage</title>
       </Helmet>
-      <Header />
       <Header getCategory={(val) => setCategory(val)}/>
       <img
         className="home_image"

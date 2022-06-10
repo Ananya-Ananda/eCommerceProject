@@ -8,11 +8,13 @@ import HomePage from './components/homePage/HomePage';
 import BookPage from './components/bookPage/BookPage';
 // import ShoppingCartPage from './components/shoppingCartPage/ShoppingCartPage';
 import AccessTokenProvider, { AccessTokenContext } from './contexts/accessTokenContext';
+import LoginProvider, { LoginContext } from './contexts/loginContext';
 import Checkout from './components/checkoutPage/Checkout'
 import ShoppingCartPage from './components/shoppingCart/ShoppingCartPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <LoginProvider>
   <AccessTokenProvider>
   <BrowserRouter>
     <Routes>
@@ -24,6 +26,7 @@ root.render(
     </Routes>
   </BrowserRouter>
   </AccessTokenProvider>
+  </LoginProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

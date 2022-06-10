@@ -12,6 +12,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import axios from "axios";
 import { AccessTokenContext } from "../../contexts/accessTokenContext";
 import sanitizeHtml from 'sanitize-html';
+import { LoginContext } from "../../contexts/loginContext";
+import { useNavigate } from "react-router-dom";
 // import Sanitized from "./Sanitized";
 
 function BookPage(props){
@@ -19,12 +21,14 @@ function BookPage(props){
     const [book, setBook] = useState();
     const [count, setCount] = useState(0);
     const [docId, setDocId] = useState("");
+    const { login, setLogin } = useContext(LoginContext);
+    let navigate = useNavigate();
     // React.useState(0);
     // get prop+ display whatever
     const addTo = (id) =>{
        setCount(count + 1);
        if(count+1 === 1){
-            axios.post("http://localhost:9000/bookPage/bookInCart",{
+            axios.post("http://localhost:9000/bookPage/bookInCart/" + login.user,{
                 quantity: 1,
                 id:id
             })
@@ -33,7 +37,7 @@ function BookPage(props){
         }
         else{
             console.log(count+1)
-            axios.put("http://localhost:9000/bookPage/quantity",{
+            axios.put("http://localhost:9000/bookPage/quantity/" + login.user,{
                 quantity:count+1,
                 id:docId
             })
@@ -45,13 +49,13 @@ function BookPage(props){
         setCount(Math.max(count - 1, 0));
         // console.log(count -1)
         if(count-1 === 0){
-            fetch('http://localhost:9000/bookPage/delete/' + docId,{
+            fetch('http://localhost:9000/bookPage/delete/' + docId + "/" + login.user,{
                 method:"DELETE"
             })
             .catch((err)=> console.log(err))
         }
         else if(count-1 > 0){
-            axios.put("http://localhost:9000/bookPage/quantity",{
+            axios.put("http://localhost:9000/bookPage/quantity/" + login.user,{
                 quantity:count-1,
                 id:docId
             })
@@ -67,6 +71,10 @@ function BookPage(props){
         console.log(book);
       });
     };
+
+    const toCart = () => {
+        navigate("/shoppingcart")
+    }
 
     useEffect(() => {
       getBook();
@@ -122,7 +130,7 @@ function BookPage(props){
         <div>
             {/* some navbar */}
             <div style={styles.cart}>
-                <Button endIcon={<ShoppingCartIcon/>}>Go to cart</Button>
+                <Button endIcon={<ShoppingCartIcon/>} onClick = {toCart}>Go to cart</Button>
             </div>
             <div style={styles.splitScreen}>
                 <div style={styles.leftPane}>

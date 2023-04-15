@@ -12,8 +12,8 @@ Npm install firebase/firestore <br>
 Npm install @mui/icons-material @mui/material @emotion/react @emotion/styled @material-ui/core 
 ***
 ## To Run:
-*Make sure the entire repository has been cloned to your local environment beforehand
-In 2 terminals:
+*Make sure the entire repository has been cloned to your local environment beforehand <br>
+In 2 terminals: <br>
 Run 'npm run start' in the "API" folder followed by the "frontend" folder
 ***
 ## Features:
